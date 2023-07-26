@@ -31,10 +31,11 @@ int main(void)
 			command[i] = _strtok(list_cmds[j], " ");
 			while (command[i] != NULL && i < BUFFER_MAX - 1)
 				command[++i] = _strtok(NULL, " ");
-			if (_strcmp(ex_ptr, command[0]) == 0 && command[1] != NULL)
-				_quit(_atoi(command[1]));
-			else if (_strcmp(ex_ptr, command[0]) == 0 && command[1] == NULL)
-				_quit(0);
+			if (_strcmp(ex_ptr, command[0]) == 0)
+			{
+				free(line);
+				_quit(((command[1]) == NULL) ? 0 : _atoi(command[1]));
+			}
 			else if (_strcmp(env_str, line) == 0)
 				_env();
 			else if (is_accessable(&command[0]))
